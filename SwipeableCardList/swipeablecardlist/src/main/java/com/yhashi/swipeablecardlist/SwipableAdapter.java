@@ -5,8 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.link519.swipeablecardlist.R;
-
 import junit.framework.Assert;
 
 import java.util.List;
@@ -42,9 +40,9 @@ public class SwipableAdapter<T> extends RecyclerView.Adapter<SwipableItemViewHol
 	public SwipableItemViewHolder<T> onCreateViewHolder(ViewGroup viewGroup, int i) {
 		View v = LayoutInflater.from(viewGroup.getContext()).inflate(itemResource, null, false);
         if(contentId == 0) {
-            return new SwipableItemViewHolder<T>(v);
+            return new SwipableItemViewHolder<>(v);
         } else {
-            return new SwipableItemViewHolder<T>(v, textId, contentId);
+            return new SwipableItemViewHolder<>(v, textId, contentId);
         }
 	}
 

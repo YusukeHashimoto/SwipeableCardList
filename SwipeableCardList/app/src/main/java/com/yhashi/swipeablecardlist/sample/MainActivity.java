@@ -1,13 +1,14 @@
-package com.yhashi.swipeablecardlist;
+package com.yhashi.swipeablecardlist.sample;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
+
+import com.yhashi.swipeablecardlist.SwipableAdapter;
+import com.yhashi.swipeablecardlist.SwipableItemTouchListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,8 +35,18 @@ public class MainActivity extends Activity {
         adapter = new SwipableAdapter<String>(list);
 		recyclerView.setAdapter(adapter);
 		recyclerView.setOnTouchListener(new SwipableItemTouchListener(recyclerView) {
+            @Override
+            public void onSwipeLeft(int position) {
+
+            }
+
+            @Override
+            public void onSwipeRight(int position) {
+
+            }
+/*
 			@Override
-			void onSwipeLeft(int position) {
+			public void onSwipeLeft(int position) {
 				Toast.makeText(MainActivity.this, "left", Toast.LENGTH_SHORT).show();
 				Log.v("", "moved left");
 				adapter.remove(position);
@@ -43,11 +54,11 @@ public class MainActivity extends Activity {
 			}
 
 			@Override
-			void onSwipeRight(int position) {
+			public void onSwipeRight(int position) {
 				Toast.makeText(MainActivity.this, "right", Toast.LENGTH_SHORT).show();
 				Log.v("", "moved right");
-			}
-
+			}*/
+/*
 			@Override
 			void onSwipeUp(int position) {
 				Toast.makeText(MainActivity.this, "up", Toast.LENGTH_SHORT).show();
@@ -62,7 +73,7 @@ public class MainActivity extends Activity {
 					String copiedItem = adapter.getItem(position);
 					adapter.add(copiedItem, position + 1);
 				}
-			}
+			}*/
 		});
 	}
 

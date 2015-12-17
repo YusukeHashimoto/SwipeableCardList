@@ -5,7 +5,7 @@ android {
     buildToolsVersion "21.1.2"
 
     defaultConfig {
-        applicationId "com.yhashi.swipeablecardlist"
+        applicationId "com.yhashi.swipeablecardlist.sample"
         minSdkVersion 14
         targetSdkVersion 22
         versionCode 1

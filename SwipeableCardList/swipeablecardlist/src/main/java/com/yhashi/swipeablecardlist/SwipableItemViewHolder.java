@@ -4,11 +4,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
-import com.link519.swipeablecardlist.R;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SwipableItemViewHolder<T> extends RecyclerView.ViewHolder{
 	private TextView textView;
 	private View content;
+	private List<View> backgroundViews = new ArrayList<View>();
 
     /**
      * デフォルトのカードレイアウトを使う場合
@@ -18,6 +20,14 @@ public class SwipableItemViewHolder<T> extends RecyclerView.ViewHolder{
 		super(itemView);
 		textView = (TextView)itemView.findViewById(R.id.itemContentText);
 		content = itemView.findViewById(R.id.itemContent);
+
+		backgroundViews.add(itemView.findViewById(R.id.itemLeftOn));
+		backgroundViews.add(itemView.findViewById(R.id.itemLeftOff));
+		backgroundViews.add(itemView.findViewById(R.id.itemRightOn));
+		backgroundViews.add(itemView.findViewById(R.id.itemRightOff));
+		for(View view : backgroundViews) {
+			view.setVisibility(View.INVISIBLE);
+		}
 	}
 
     /**
@@ -40,4 +50,13 @@ public class SwipableItemViewHolder<T> extends RecyclerView.ViewHolder{
 		return content;
 	}
 
+	void setBackgroundView(int pos) {
+		for(int i = 0; i < backgroundViews.size(); i++) {
+			if(i == pos) {
+				backgroundViews.get(i).setVisibility(View.VISIBLE);
+			} else {
+				backgroundViews.get(i).setVisibility(View.INVISIBLE);
+			}
+		}
+	}
 }
