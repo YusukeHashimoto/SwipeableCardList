@@ -16,7 +16,7 @@ abstract class SwipableItemTouchListener implements View.OnTouchListener {
 	private int mSwitchState = NUTRAL;
 	private RecyclerView recyclerView;
 	//private View touchedView;
-	private SwipableItemViewHolder touchedView;
+    private SwipableItemViewHolder touchedView;
 	private int touchedPos;
 	private long animationTime;
 	
@@ -48,9 +48,12 @@ abstract class SwipableItemTouchListener implements View.OnTouchListener {
 					touchedPos = i;
 					ViewHolder vh = recyclerView.getChildViewHolder(child);
 					if(vh instanceof SwipableItemViewHolder)
-						touchedView = (SwipableItemViewHolder<String>)vh;
+					//Assert.assertTrue(vh instanceof SwipableItemViewHolder);
+                        touchedView = (SwipableItemViewHolder<String>)vh;
 					Log.v("", "You touched " + child.toString());
-				}
+				} else {
+                    touchedView = null;
+                }
 			}
 			
 			mSwiping = false;
@@ -58,6 +61,7 @@ abstract class SwipableItemTouchListener implements View.OnTouchListener {
 			break;
 		case MotionEvent.ACTION_UP:
 			mSwiping = false;
+            if(touchedView == null) break;
 			touchedView.getContent().animate().translationX(0)
 			.setDuration(animationTime).setListener(new AnimatorListenerAdapter() {
 				@Override
@@ -91,13 +95,16 @@ abstract class SwipableItemTouchListener implements View.OnTouchListener {
 					mSwitchState = (deltaY > 0) ? DOWN : UP;
 				}
 				onSwiping();
-				touchedView.getContent().setTranslationX(deltaX);
+                if(touchedView != null) {
+                    touchedView.getContent().setTranslationX(deltaX);
+                }
 			} else {
 				mSwiping = true;
 			}
 			break;
 		case MotionEvent.ACTION_CANCEL:
 			mDownPos.set(0, 0);
+            touchedView = null;
 			break;
 		}
 		return false;

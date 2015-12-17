@@ -31,7 +31,7 @@ public class MainActivity extends Activity {
 			list.add("card" + i);
 		}
 
-		adapter = new SwipableAdapter<String>(R.layout.list_item, list);
+        adapter = new SwipableAdapter<String>(list);
 		recyclerView.setAdapter(adapter);
 		recyclerView.setOnTouchListener(new SwipableItemTouchListener(recyclerView) {
 			@Override

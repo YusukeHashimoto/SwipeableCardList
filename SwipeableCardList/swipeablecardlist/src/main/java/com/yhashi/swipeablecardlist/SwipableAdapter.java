@@ -5,6 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.link519.swipeablecardlist.R;
+
 import junit.framework.Assert;
 
 import java.util.List;
@@ -12,10 +14,17 @@ import java.util.List;
 public class SwipableAdapter<T> extends RecyclerView.Adapter<SwipableItemViewHolder<T>> {
 	private List<T> list;
 	private int itemResource;
+    private int contentId;
+    private int textId;
 	
-	public SwipableAdapter(int itemResource, List<T> list) {
+	public SwipableAdapter(List<T> list) {
 		this.list = list;
-		this.itemResource = itemResource;
+		this.itemResource = R.layout.list_item;
+	}
+
+	public SwipableAdapter(List<T> list, int itemResource, int contentId, int textId) {
+		this.list = list;
+        this.itemResource = itemResource;
 	}
 
 	@Override
@@ -32,7 +41,11 @@ public class SwipableAdapter<T> extends RecyclerView.Adapter<SwipableItemViewHol
 	@Override
 	public SwipableItemViewHolder<T> onCreateViewHolder(ViewGroup viewGroup, int i) {
 		View v = LayoutInflater.from(viewGroup.getContext()).inflate(itemResource, null, false);
-		return new SwipableItemViewHolder<T>(v);
+        if(contentId == 0) {
+            return new SwipableItemViewHolder<T>(v);
+        } else {
+            return new SwipableItemViewHolder<T>(v, textId, contentId);
+        }
 	}
 
 	public void remove(int position) {
